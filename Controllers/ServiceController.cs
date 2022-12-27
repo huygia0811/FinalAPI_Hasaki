@@ -10,13 +10,34 @@ namespace FinalAPI_Hasaki.Controllers
 {
     public class ServiceController : ApiController
     {
-        [Route("api/ServiceController/GetAllSanPham")]
+        [Route("api/ServiceController/GetSPByLoai")]
         [HttpGet]
-        public IHttpActionResult GetAllSanPham()
+        public IHttpActionResult GetSPByLoai(int maloai)
         {
             try
             {
-                DataTable result = Database.Database.ReadTable("Proc_GetAllSanPham");
+                Dictionary<string, object> param = new Dictionary<string, object>();
+                param.Add("maloai", maloai);
+
+                DataTable result = Database.Database.ReadTable("Proc_GetSPByLoai", param);
+                return Ok(result);
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
+
+        [Route("api/ServiceController/GetDetailSP")]
+        [HttpGet]
+        public IHttpActionResult GetDetailSP(int masp)
+        {
+            try
+            {
+                Dictionary<string, object> param = new Dictionary<string, object>();
+                param.Add("masp", masp);
+
+                DataTable result = Database.Database.ReadTable("Proc_GetDetailSP", param);
                 return Ok(result);
             }
             catch
