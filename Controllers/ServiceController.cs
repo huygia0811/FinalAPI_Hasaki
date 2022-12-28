@@ -5,7 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-
+using FinalAPI_Hasaki.Database;
 namespace FinalAPI_Hasaki.Controllers
 {
     public class ServiceController : ApiController
@@ -39,6 +39,21 @@ namespace FinalAPI_Hasaki.Controllers
 
                 DataTable result = Database.Database.ReadTable("Proc_GetDetailSP", param);
                 return Ok(result);
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
+        [Route("api/ServiceController/DangKy")]
+        [HttpPost]
+        public IHttpActionResult DangKy(NguoiDung nd)
+        {
+            try
+            {
+                NguoiDung kq = Database.Database.Them_Nguoi_Dung(nd);
+
+                return Ok(kq);
             }
             catch
             {
