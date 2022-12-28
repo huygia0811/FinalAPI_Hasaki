@@ -28,6 +28,39 @@ namespace FinalAPI_Hasaki.Controllers
             }
         }
 
+        [Route("api/ServiceController/GetSPByHang")]
+        [HttpGet]
+        public IHttpActionResult GetSPByHang(int mahang)
+        {
+            try
+            {
+                Dictionary<string, object> param = new Dictionary<string, object>();
+                param.Add("mahang", mahang);
+
+                DataTable result = Database.Database.ReadTable("Proc_GetSPByHang", param);
+                return Ok(result);
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
+
+        [Route("api/ServiceController/GetHang")]
+        [HttpGet]
+        public IHttpActionResult GetHang()
+        {
+            try
+            {
+                DataTable result = Database.Database.ReadTable("Proc_GetHang");
+                return Ok(result);
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
+
         [Route("api/ServiceController/GetDetailSP")]
         [HttpGet]
         public IHttpActionResult GetDetailSP(int masp)
