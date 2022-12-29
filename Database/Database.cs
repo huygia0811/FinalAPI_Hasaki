@@ -61,7 +61,7 @@ namespace FinalAPI_Hasaki.Database
         }
         public static object Exec_Command(string StoredProcedureName, Dictionary<string, object> dic_param = null)
         {
-            string SQLconnectionString = ConfigurationManager.ConnectionStrings["Connectionstring"].ConnectionString;
+            string SQLconnectionString = ConfigurationManager.ConnectionStrings["dbhasakiConnectionString"].ConnectionString;
             object result = null;
             using (SqlConnection conn = new SqlConnection(SQLconnectionString))
             {
@@ -105,16 +105,33 @@ namespace FinalAPI_Hasaki.Database
             }
             return result;
         }
-        public static NguoiDung Them_Nguoi_Dung(NguoiDung nd)
+        public static NguoiDung DangKy_TaiKhoan(NguoiDung nd)
         {
-            Dictionary<string, object> param = new Dictionary<string, object>();
-            param.Add("hoten", nd.HOTEN);
+            Dictionary<string, object> param = new Dictionary<string, object>();  
             param.Add("sodt", nd.SODIENTHOAI);
             param.Add("matkhau", nd.MATKHAU);
+            param.Add("email", nd.EMAIL);
             int kq = int.Parse(Exec_Command("Proc_DangKy", param).ToString());
             if (kq > -1)
                 nd.MAKH = kq;
             return nd;
+        }
+        public static NguoiDung DangNhap(string SODIENTHOAI, string MATKHAU)
+        {
+            Dictionary<string, object> param = new Dictionary<string, object>();
+            param.Add("sodt", SODIENTHOAI);
+            param.Add("matkhau", MATKHAU);
+            DataTable tb = ReadTable("Proc_DangNhap", param);
+            NguoiDung kq = new NguoiDung();
+            if (tb.Rows.Count > 0)
+            {
+                kq.SODIENTHOAI =tb.Rows[0]["SODIENTHOAI"].ToString();
+                kq.MATKHAU = tb.Rows[0]["MATKHAU"].ToString();
+                kq.MAKH= int.Parse(tb.Rows[0]["MAKH"].ToString());
+            }
+            else
+                kq.MAKH = 0;
+            return kq;
         }
     }
 }

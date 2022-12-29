@@ -84,9 +84,24 @@ namespace FinalAPI_Hasaki.Controllers
         {
             try
             {
-                NguoiDung kq = Database.Database.Them_Nguoi_Dung(nd);
+                NguoiDung kq = Database.Database.DangKy_TaiKhoan(nd);
 
                 return Ok(kq);
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
+        [Route("api/ServiceController/DangNhap")]
+        [HttpGet]
+        public IHttpActionResult DangNhap(string SODIENTHOAI, string MATKHAU)
+        {
+            try
+            {
+                NguoiDung nd = Database.Database.DangNhap(SODIENTHOAI, MATKHAU);
+
+                return Ok(nd);
             }
             catch
             {
