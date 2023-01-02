@@ -133,5 +133,13 @@ namespace FinalAPI_Hasaki.Database
                 kq.MAKH = 0;
             return kq;
         }
+        public static void ThemGioHang(int MAKH, int MASP, int soluong)
+        {
+            Dictionary<string, object> param = new Dictionary<string, object>();
+            param.Add("makh", MAKH);
+            param.Add("masp", MASP);
+            param.Add("soluong", soluong);
+            ReadTable("Proc_ThemGioHang", param);
+        }
     }
 }

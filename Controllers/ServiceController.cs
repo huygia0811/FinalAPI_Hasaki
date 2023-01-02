@@ -108,5 +108,19 @@ namespace FinalAPI_Hasaki.Controllers
                 return NotFound();
             }
         }
+        [Route("api/ServiceController/ThemGioHang")]
+        [HttpGet]
+        public IHttpActionResult ThemGioHang(int MAKH, int MASP, int soluong)
+        {
+            try
+            {
+                Database.Database.ThemGioHang(MAKH, MASP, soluong);
+                return Ok();
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
     }
 }
