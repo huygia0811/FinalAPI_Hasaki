@@ -78,6 +78,23 @@ namespace FinalAPI_Hasaki.Controllers
                 return NotFound();
             }
         }
+        [Route("api/ServiceController/Show_Trangthai_Info")]
+        [HttpGet]
+        public IHttpActionResult Show_Trangthai_Info(int trangthai, int makh)
+        {
+            try
+            {
+                Dictionary<string, object> param = new Dictionary<string, object>();
+                param.Add("trangthai", trangthai);
+                param.Add("makh", makh);
+                DataTable result = Database.Database.ReadTable("Proc_info_from_trangthai", param);
+                return Ok(result);
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
         [Route("api/ServiceController/DangKy")]
         [HttpPost]
         public IHttpActionResult DangKy(NguoiDung nd)
