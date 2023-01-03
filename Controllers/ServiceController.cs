@@ -156,5 +156,40 @@ namespace FinalAPI_Hasaki.Controllers
                 return NotFound();
             }
         }
+        [Route("api/ServiceController/UpdateSLGioHang")]
+        [HttpGet]
+        public IHttpActionResult UpdateSLGioHang(int MAKH, int MASP, int sl_updated)
+        {
+            try
+            {
+                Dictionary<string, object> param = new Dictionary<string, object>();
+                param.Add("makh", MAKH);
+                param.Add("masp", MASP);
+                param.Add("sl_updated", sl_updated);
+                DataTable result = Database.Database.ReadTable("Proc_UpdateSLGioHang", param);
+                return Ok(result);
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
+        [Route("api/ServiceController/DropSPGioHang")]
+        [HttpGet]
+        public IHttpActionResult DropSPGioHang(int MAKH, int MASP)
+        {
+            try
+            {
+                Dictionary<string, object> param = new Dictionary<string, object>();
+                param.Add("makh", MAKH);
+                param.Add("masp", MASP);
+                DataTable result = Database.Database.ReadTable("Proc_DropSPGioHang", param);
+                return Ok(result);
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
     }
 }
