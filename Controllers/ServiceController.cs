@@ -139,5 +139,22 @@ namespace FinalAPI_Hasaki.Controllers
                 return NotFound();
             }
         }
+
+        [Route("api/ServiceController/SelectGioHang")]
+        [HttpGet]
+        public IHttpActionResult SelectGioHang(int MAKH)
+        {
+            try
+            {
+                Dictionary<string, object> param = new Dictionary<string, object>();
+                param.Add("makh", MAKH);
+                DataTable result = Database.Database.ReadTable("Proc_SelectGioHang", param);
+                return Ok(result);
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
     }
 }
