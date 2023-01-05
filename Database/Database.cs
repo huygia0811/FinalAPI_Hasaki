@@ -108,25 +108,37 @@ namespace FinalAPI_Hasaki.Database
         {
             Dictionary<string, object> param = new Dictionary<string, object>();  
             param.Add("sodt", nd.SODIENTHOAI);
-            param.Add("matkhau", nd.MATKHAU);
+            param.Add("matkhauhash", nd.MATKHAUHASH);
+            param.Add("matkhausalt", nd.MATKHAUSALT);
             param.Add("email", nd.EMAIL);
             int kq = int.Parse(Exec_Command("Proc_DangKy", param).ToString());
             if (kq > -1)
                 nd.MAKH = kq;
             return nd;
         }
-        public static NguoiDung DangNhap(string SODIENTHOAI, string MATKHAU)
+        public static NguoiDung DoiMatKhau(NguoiDung nd)
+        {
+            Dictionary<string, object> param = new Dictionary<string, object>();
+            param.Add("makh", nd.SODIENTHOAI);
+            param.Add("matkhauhash", nd.MATKHAUHASH);
+            param.Add("matkhausalt", nd.MATKHAUSALT);
+            int kq = int.Parse(Exec_Command("Proc_DoiMatKhau", param).ToString());
+            if (kq > -1)
+                nd.MAKH = kq;
+            return nd;
+        }
+        public static NguoiDung apiDangNhap(string SODIENTHOAI)
         {
             Dictionary<string, object> param = new Dictionary<string, object>();
             param.Add("sodt", SODIENTHOAI);
-            param.Add("matkhau", MATKHAU);
             DataTable tb = ReadTable("Proc_DangNhap", param);
             NguoiDung kq = new NguoiDung();
             if (tb.Rows.Count > 0)
             {
-                kq.SODIENTHOAI =tb.Rows[0]["SODIENTHOAI"].ToString();
-                kq.MATKHAU = tb.Rows[0]["MATKHAU"].ToString();
-                kq.MAKH= int.Parse(tb.Rows[0]["MAKH"].ToString());
+                kq.SODIENTHOAI = tb.Rows[0]["SODIENTHOAI"].ToString();
+                kq.MATKHAUHASH = tb.Rows[0]["MATKHAUHASH"].ToString();
+                kq.MATKHAUSALT = tb.Rows[0]["MATKHAUSALT"].ToString();
+                kq.MAKH = int.Parse(tb.Rows[0]["MAKH"].ToString());
             }
             else
                 kq.MAKH = 0;

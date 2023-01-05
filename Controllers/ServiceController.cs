@@ -182,13 +182,28 @@ namespace FinalAPI_Hasaki.Controllers
                 return NotFound();
             }
         }
-        [Route("api/ServiceController/DangNhap")]
-        [HttpGet]
-        public IHttpActionResult DangNhap(string SODIENTHOAI, string MATKHAU)
+        [Route("api/ServiceController/DoiMatKhau")]
+        [HttpPost]
+        public IHttpActionResult DoiMatKhau(NguoiDung nd)
         {
             try
             {
-                NguoiDung nd = Database.Database.DangNhap(SODIENTHOAI, MATKHAU);
+                NguoiDung kq = Database.Database.DoiMatKhau(nd);
+
+                return Ok(kq);
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
+        [Route("api/ServiceController/DangNhap")]
+        [HttpGet]
+        public IHttpActionResult DangNhap(string SODIENTHOAI)
+        {
+            try
+            {
+                NguoiDung nd = Database.Database.apiDangNhap(SODIENTHOAI);
 
                 return Ok(nd);
             }
