@@ -191,5 +191,37 @@ namespace FinalAPI_Hasaki.Controllers
                 return NotFound();
             }
         }
+        [Route("api/ServiceController/TongTienGH")]
+        [HttpGet]
+        public IHttpActionResult TongTienGH(int MAKH)
+        {
+            try
+            {
+                Dictionary<string, object> param = new Dictionary<string, object>();
+                param.Add("makh", MAKH);
+                DataTable result = Database.Database.ReadTable("Proc_TongTienGH", param);
+                return Ok(result);
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
+        [Route("api/ServiceController/DatHang")]
+        [HttpGet]
+        public IHttpActionResult DatHang(int MAKH)
+        {
+            try
+            {
+                Dictionary<string, object> param = new Dictionary<string, object>();
+                param.Add("makh", MAKH);
+                DataTable result = Database.Database.ReadTable("Proc_DatHang", param);
+                return Ok(result);
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
     }
 }

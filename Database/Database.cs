@@ -98,7 +98,6 @@ namespace FinalAPI_Hasaki.Database
                 }
                 catch (Exception ex)
                 {
-
                     result = null;
                 }
 
