@@ -78,6 +78,78 @@ namespace FinalAPI_Hasaki.Controllers
                 return NotFound();
             }
         }
+        [Route("api/ServiceController/GetInfoKhachHang")]
+        [HttpGet]
+        public IHttpActionResult GetInfoKhachHang(int makh)
+        {
+            try
+            {
+                Dictionary<string, object> param = new Dictionary<string, object>();
+                param.Add("makh", makh);
+
+                DataTable result = Database.Database.ReadTable("Proc_get_info_user", param);
+                return Ok(result);
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
+        //
+        [Route("api/ServiceController/updateHoTen")]
+        [HttpGet]
+        public IHttpActionResult updateHoTen(string hoten,int makh)
+        {
+            try
+            {
+                Dictionary<string, object> param = new Dictionary<string, object>();
+                param.Add("makh", makh);
+                param.Add("hoten", hoten);
+
+                DataTable result = Database.Database.ReadTable("Proc_update_hoten", param);
+                return Ok(result);
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
+        [Route("api/ServiceController/updateCCCD")]
+        [HttpGet]
+        public IHttpActionResult updateCCCD(string cccd,int makh)
+        {
+            try
+            {
+                Dictionary<string, object> param = new Dictionary<string, object>();
+                param.Add("makh", makh);
+                param.Add("cccd", cccd);
+                DataTable result = Database.Database.ReadTable("Proc_update_cccd", param);
+                return Ok(result);
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
+        [Route("api/ServiceController/updateDiaChi")]
+        [HttpGet]
+        public IHttpActionResult updateDiaChi(string dchi,int makh)
+        {
+            try
+            {
+                Dictionary<string, object> param = new Dictionary<string, object>();
+                param.Add("makh", makh);
+                param.Add("dchi", dchi);
+
+                DataTable result = Database.Database.ReadTable("Proc_update_diachi", param);
+                return Ok(result);
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
+        //
         [Route("api/ServiceController/Show_Trangthai_Info")]
         [HttpGet]
         public IHttpActionResult Show_Trangthai_Info(int trangthai, int makh)
