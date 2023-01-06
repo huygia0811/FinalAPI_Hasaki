@@ -119,13 +119,22 @@ namespace FinalAPI_Hasaki.Database
         public static NguoiDung DoiMatKhau(NguoiDung nd)
         {
             Dictionary<string, object> param = new Dictionary<string, object>();
-            param.Add("makh", nd.SODIENTHOAI);
+            param.Add("makh", nd.MAKH);
             param.Add("matkhauhash", nd.MATKHAUHASH);
             param.Add("matkhausalt", nd.MATKHAUSALT);
             int kq = int.Parse(Exec_Command("Proc_DoiMatKhau", param).ToString());
             if (kq > -1)
                 nd.MAKH = kq;
             return nd;
+        }
+        public static Forgot_Password CheckEmail(Forgot_Password fg)
+        {
+            Dictionary<string, object> param = new Dictionary<string, object>();
+            param.Add("email", fg.gmail);         
+            int kq = int.Parse(Exec_Command("Proc_Check_email", param).ToString());
+            if (kq > -1)
+                fg.makh = kq;
+            return fg;
         }
         public static NguoiDung apiDangNhap(string SODIENTHOAI)
         {

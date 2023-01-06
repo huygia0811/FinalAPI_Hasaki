@@ -197,6 +197,21 @@ namespace FinalAPI_Hasaki.Controllers
                 return NotFound();
             }
         }
+        [Route("api/ServiceController/ForgotPassword")]
+        [HttpPost]
+        public IHttpActionResult ForgotPassword(Forgot_Password fg)
+        {
+            try
+            {
+                Forgot_Password kq = Database.Database.CheckEmail(fg);
+
+                return Ok(kq);
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
         [Route("api/ServiceController/DangNhap")]
         [HttpGet]
         public IHttpActionResult DangNhap(string SODIENTHOAI)
