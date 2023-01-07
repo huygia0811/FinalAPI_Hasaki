@@ -167,6 +167,58 @@ namespace FinalAPI_Hasaki.Controllers
                 return NotFound();
             }
         }
+
+        [Route("api/ServiceController/Show_Trangthai_TatCa")]
+        [HttpGet]
+        public IHttpActionResult Show_Trangthai_TatCa(int makh)
+        {
+            try
+            {
+                Dictionary<string, object> param = new Dictionary<string, object>();            
+                param.Add("makh", makh);
+                DataTable result = Database.Database.ReadTable("Proc_info_from_tatca", param);
+                return Ok(result);
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
+        [Route("api/ServiceController/HuyHoaDon")]
+        [HttpGet]
+        public IHttpActionResult HuyHoaDon(int sohd,int makh)
+        {
+            try
+            {
+                Dictionary<string, object> param = new Dictionary<string, object>();
+                param.Add("sohd", sohd);
+                param.Add("makh", makh);
+                DataTable result = Database.Database.ReadTable("Proc_huy_hoadon", param);
+                return Ok(result);
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
+
+        [Route("api/ServiceController/Search")]
+        [HttpGet]
+        public IHttpActionResult Search(string keyword)
+        {
+            try
+            {
+                Dictionary<string, object> param = new Dictionary<string, object>();
+                param.Add("keyworld", keyword);
+                DataTable result = Database.Database.ReadTable("Proc_Search", param);
+                return Ok(result);
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
+
         [Route("api/ServiceController/DangKy")]
         [HttpPost]
         public IHttpActionResult DangKy(NguoiDung nd)
